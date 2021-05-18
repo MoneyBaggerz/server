@@ -22,7 +22,7 @@ const shoes = require('./controllers/shoes')
 app.use('/shoes', shoes)
 
 dotenv.config()
-const port = ('port', process.env.PORT || 8000)
+const port = ('port', process.env.PORT || 4000)
 
 // Start Server
 app.listen(port)
