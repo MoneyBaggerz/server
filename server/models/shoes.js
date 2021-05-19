@@ -1,17 +1,19 @@
 const mongoose = require('../db/connections')
+const reviews = require('./shoes_reviews')
 
 const shoesSchema = new mongoose.Schema({
 	name: String,
 	price: Number,
-	size: Number,
-	color: String,
+	size: [Number],
+	color: [String],
 	availability: Boolean,
-	// brand: {
-	// 	type: mongoose.Schema.Types.ObjectId,ref:'Brands'
-	// },
+	reviews: [reviews],
 	image: {
 		data: Buffer,
 		contentType: String
+	},
+	brand: {
+		type: mongoose.Schema.Types.ObjectId, ref:'Brands', required: true
 	}
 })
 
