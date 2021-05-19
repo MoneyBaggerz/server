@@ -9,7 +9,7 @@ mongoose
         useFindAndModify: false,
     })
     .then((instance) => {
-        console.log(`connected to db: ${instance.connections[0].name}`)
+        console.log(`connected to db: ${ instance.connections[0].name }`)
     })
     .catch((error) => console.log('Connection Failed', error))
 
