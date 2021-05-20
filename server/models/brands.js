@@ -5,7 +5,8 @@ const apparels = require('./apparels')
 const brandsSchema = new mongoose.Schema({
 	name: {
         type: String,
-        require: true
+        unique: true,
+        required: true
     },
     shoes: [shoes],
     apparels: [apparels]
