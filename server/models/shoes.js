@@ -13,7 +13,9 @@ const shoesSchema = new mongoose.Schema({
 		contentType: String
 	},
 	brand: {
-		type: mongoose.Schema.Types.ObjectId, ref:'Brands', required: true
+		type: mongoose.Schema.Types.ObjectId,
+		ref:'Brands',
+		required: true
 	}
 })
 
