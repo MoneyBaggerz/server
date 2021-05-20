@@ -1,6 +1,7 @@
 const express = require('express')
 const Shoes = require('../models/shoes')
 const router = express.Router()
+const { requireToken } = require('../middleware/auth')
 
 // Get shoes
 router.get('/shoes', (req, res, next) => {
@@ -40,7 +41,7 @@ router.put('/shoes/:id', (req, res, next) => {
 })
 
 // DELETE a shoe
-router.delete('shoes/:id', (req, res, next) => {
+router.delete('/shoes/:id', (req, res, next) => {
 	Shoes.findByIdAndDelete(req.params.id)
 		.then((shoes) => res.json(shoes))
 		.catch(next)
