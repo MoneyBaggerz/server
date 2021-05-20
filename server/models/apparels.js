@@ -6,7 +6,10 @@ const apparelsSchema = new mongoose.Schema({
 	price: Number,
 	size: [Number],
 	color: [String],
-	availability: Boolean,
+	availability: {
+		type: Boolean,
+		required: true
+	},
 	reviews: [reviews],
 	image: {
 		data: Buffer,
