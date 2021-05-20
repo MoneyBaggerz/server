@@ -16,22 +16,20 @@ app.use(
 )
 
 // Routes
-app.get('/', (req, res) => { res.send('On!') })
-
 const brands = require('./controllers/bands')
-app.use('/brands', brands)
+app.use('/', brands)
 
 const shoes = require('./controllers/shoes')
-app.use('/shoes', shoes)
+app.use('/', shoes)
 
-// const shoeReviews = require('./controllers/shoes_reviews')
-// app.use('./shoeReviews', shoeReviews)
+const shoeReviews = require('./controllers/shoes_reviews')
+app.use('/', shoeReviews)
 
 const apparels = require('./controllers/apparels')
-app.use('/apparels', apparels)
+app.use('/', apparels)
 
-// const apparelsReviews = require('./controllers/apparels_reviews')
-// app.use('/apparelsReviews', apparelsReviews)
+const apparelsReviews = require('./controllers/apparels_reviews')
+app.use('/', apparelsReviews)
 
 dotenv.config()
 const port = ('port', process.env.PORT || 4000)
