@@ -16,20 +16,20 @@ app.use(
 )
 
 // Routes
-const brands = require('./controllers/bands')
-app.use('/', brands)
-
 const shoes = require('./controllers/shoes')
 app.use('/', shoes)
-
-const shoeReviews = require('./controllers/shoes_reviews')
-app.use('/', shoeReviews)
 
 const apparels = require('./controllers/apparels')
 app.use('/', apparels)
 
-const apparelsReviews = require('./controllers/apparels_reviews')
-app.use('/', apparelsReviews)
+// const brands = require('./controllers/bands')
+// app.use('/', brands)
+
+// const shoeReviews = require('./controllers/shoes_reviews')
+// app.use('/', shoeReviews)
+
+// const apparelsReviews = require('./controllers/apparels_reviews')
+// app.use('/', apparelsReviews)
 
 dotenv.config()
 const port = ('port', process.env.PORT || 4000)
