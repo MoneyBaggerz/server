@@ -10,7 +10,7 @@ const apparelsSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
-	reviews: [reviews],
+	// reviews: [reviews],
 	image: {
 		data: Buffer,
 		contentType: String
