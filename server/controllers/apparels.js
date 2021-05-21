@@ -11,13 +11,13 @@ router.get('/apparels', (req, res, next) => {
 })
 
 // Get user apparels
-router.get('/users/apparels', requireToken, (req, res, next) => {
-	Apparels.find({ 
-		user: mongoose.Types.ObjectId(req.user._id)
-	})
-	.then((apparels) => res.json(apparels))
-	.catch(next)
-})
+// router.get('/users/apparels', requireToken, (req, res, next) => {
+// 	Apparels.find({ 
+// 		user: mongoose.Types.ObjectId(req.user._id)
+// 	})
+// 	.then((apparels) => res.json(apparels))
+// 	.catch(next)
+// })
 
 // GET a apparel
 router.get('/apparels/:id', (req, res, next) => {
