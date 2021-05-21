@@ -11,13 +11,13 @@ router.get('/shoes', (req, res, next) => {
 })
 
 // Get user shoes
-router.get('/users/shoes', requireToken, (req, res, next) => {
-	Shoes.find({ 
-		user: mongoose.Types.ObjectId(req.user._id)
-	})
-	.then((shoes) => res.json(shoes))
-	.catch(next)
-})
+// router.get('/users/shoes', requireToken, (req, res, next) => {
+// 	Shoes.find({ 
+// 		user: mongoose.Types.ObjectId(req.user._id)
+// 	})
+// 	.then((shoes) => res.json(shoes))
+// 	.catch(next)
+// })
 
 // GET a shoe
 router.get('/shoes/:id', (req, res, next) => {
@@ -27,7 +27,7 @@ router.get('/shoes/:id', (req, res, next) => {
 })
 
 // POST a shoe
-router.post('/shoes', requireToken, (req, res, next) => {
+router.post('/shoes', (req, res, next) => {
 	Shoes.create(req.body)
 		.then((shoes) => res.json(shoes))
 		.catch(next)
