@@ -1,7 +1,7 @@
 const express = require('express')
 const Shoes = require('../models/shoes')
 const router = express.Router()
-const { requireToken } = require('../middleware/auth')
+// const { requireToken } = require('../middleware/auth')
 
 // Get shoes
 router.get('/shoes', (req, res, next) => {
