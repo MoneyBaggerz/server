@@ -19,6 +19,12 @@ router.get('/:shoesId/reviews', (req, res, next) => {
 // })
 
 // POST a apparel review
+router.post('/:shoesId/reviews', (req, res, next) => {
+	ShoesReviews.create(req.body)
+		.then((shoes) => res.json(shoes))
+		.catch(next)
+})
+
 // router.post('/:shoesId/reviews/create', requireToken, (req, res, next) => {
 //     const newReviews = {
 //         ...req.body,
