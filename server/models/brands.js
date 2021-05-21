@@ -8,8 +8,8 @@ const brandsSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    shoes: [shoes],
-    apparels: [apparels]
+    // shoes: [shoes],
+    // apparels: [apparels]
 })
 
 module.exports = new mongoose.model('Brands', brandsSchema)
