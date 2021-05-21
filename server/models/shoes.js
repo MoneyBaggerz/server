@@ -1,9 +1,7 @@
 const mongoose = require('../db/connections')
-const reviews = require('./shoes_reviews')
-const nanoid = require('nanoid')
+const ShoeReviews = require('./shoes_reviews')
 
 const shoesSchema = new mongoose.Schema({
-	_id: Number,
 	name: String,
 	price: Number,
 	size: [Number],
@@ -12,11 +10,15 @@ const shoesSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
-	// reviews: [reviews],
 	image: {
 		data: Buffer,
 		contentType: String
 	},
+	reviews: [ShoeReviews]
+	// reviews: [{
+	// 	type: mongoose.Schema.Types.ObjectId,
+	// 	ref: 'ShoeReviews'
+	// }]
 	// brand: {
 	// 	type: mongoose.Schema.Types.ObjectId,
 	// 	ref:'Brands',
