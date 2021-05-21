@@ -3,10 +3,13 @@ const mongoose = require('../db/connections')
 const shoeReviewsSchema = new mongoose.Schema({
 	overallRating: {
 		type: Number,
+		min: 1,
+		max: 5,
 		required: true
 	},
 	size: {
 		type: String,
+		enun: ['small', 'medium', 'large'],
 		required: true
 	},
     title: {
