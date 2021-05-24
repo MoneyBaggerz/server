@@ -1,8 +1,8 @@
 const express = require('express')
-const ShoesReviews = require('../models/shoes_reviews')
-const Shoes = require('../models/shoes')
+const ShoesReviews = require('../models/shoes_reviews').ShoeReviews
+const Shoes = require('../models/shoes').Shoes
 const router = express.Router()
-const { requireToken } = require('../middleware/auth')
+// const { requireToken } = require('../middleware/auth')
 
 // GET a review
 router.get('/:shoesId/reviews', (req, res, next) => {
@@ -21,7 +21,16 @@ router.get('/:shoesId/reviews', (req, res, next) => {
 // POST a apparel review
 router.post('/:shoesId/reviews', (req, res, next) => {
 	ShoesReviews.create(req.body)
-		.then((shoes) => res.json(shoes))
+		.then((shoeReview) => {
+			Shoes.findById(req.params.shoesId)
+			.then((shoe) => {
+				shoe.reviews.push(shoeReview)
+				return shoe.save()
+			})
+		})
+		.then(() => {
+			res.status(201)
+		})
 		.catch(next)
 })
 
