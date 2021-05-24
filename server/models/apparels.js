@@ -1,5 +1,5 @@
 const mongoose = require('../db/connections')
-const reviews = require('./apparels_reviews')
+const reviews = require('./apparels_reviews').apparelsReviewsSchema
 
 const apparelsSchema = new mongoose.Schema({
 	name: String,
@@ -10,7 +10,7 @@ const apparelsSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
-	// reviews: [reviews],
+	reviews: [reviews],
 	image: {
 		data: Buffer,
 		contentType: String
@@ -22,4 +22,8 @@ const apparelsSchema = new mongoose.Schema({
 	}
 })
 
-module.exports = new mongoose.model('Apparels', apparelsSchema)
+// module.exports = new mongoose.model('Apparels', apparelsSchema)
+
+const Apparels = mongoose.model('Apparels', apparelsSchema);
+
+module.exports = {Apparels, apparelsSchema}
