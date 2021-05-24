@@ -1,7 +1,8 @@
 const express = require('express')
-const Apparels = require('../models/apparels')
+const Brands = require('../models/brands').Brands
+const Apparels = require('../models/apparels').Apparels
 const router = express.Router()
-const { requireToken } = require('../middleware/auth')
+// const { requireToken } = require('../middleware/auth')
 
 // Get apparels
 router.get('/apparels', (req, res, next) => {
@@ -30,6 +31,25 @@ router.get('/apparels/:id', (req, res, next) => {
 router.post('/apparels', (req, res, next) => {
 	Apparels.create(req.body)
 		.then((apparels) => res.json(apparels))
+		.catch(next)
+})
+
+router.post('/:brandId/apparels', (req, res, next) => {
+	const newApparel = {
+		...req.body,
+		brand: req.params.brandId
+	}
+	Apparels.create(newApparel)
+		.then((apparel) => {
+			Brands.findById(req.params.brandId)
+			.then((brand) => {
+				brand.apparels.push(apparel)
+				return brand.save()
+			})
+			.then(() => {
+				res.status(201)
+			})
+		})
 		.catch(next)
 })
 
