@@ -2,6 +2,7 @@ const express = require('express')
 const Brands = require('../models/brands').Brands
 const Shoes = require('../models/shoes').Shoes
 const router = express.Router()
+const { upload } = require('../middleware/img')
 // const { requireToken } = require('../middleware/auth')
 
 // Get shoes
@@ -28,7 +29,7 @@ router.get('/shoes/:id', (req, res, next) => {
 })
 
 // POST a shoe
-router.post('/:brandId/shoes', (req, res, next) => {
+router.post('/:brandId/shoes', upload.array('image', 3), (req, res, next) => {
 	const newShoe = {
 		...req.body,
 		brand: req.params.brandId
@@ -48,7 +49,7 @@ router.post('/:brandId/shoes', (req, res, next) => {
 })
 
 // PUT a shoe
-router.put('/shoes/:id', (req, res, next) => {
+router.put('/shoes/:id', upload.array('image', 3), (req, res, next) => {
 	Shoes.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
 		.then((shoes) => res.json(shoes))
 		.catch(next)
