@@ -17,7 +17,6 @@ app.use(
 
 // Routes
 const shoes = require('./controllers/shoes')
-<<<<<<< HEAD
 app.use('/', shoes)
 
 const apparels = require('./controllers/apparels')
@@ -31,11 +30,9 @@ app.use('/', shoeReviews)
 
 // const apparelsReviews = require('./controllers/apparels_reviews')
 // app.use('/', apparelsReviews)
-=======
+
 const users = require('./controllers/users')
-app.use('/shoes', shoes)
-app.use('/users', users)
->>>>>>> user authentication & routes
+app.use('/', users)
 
 dotenv.config()
 const port = ('port', process.env.PORT || 4000)
