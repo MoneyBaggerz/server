@@ -22,14 +22,14 @@ app.use('/', shoes)
 const apparels = require('./controllers/apparels')
 app.use('/', apparels)
 
-// const brands = require('./controllers/bands')
-// app.use('/', brands)
+const brands = require('./controllers/bands')
+app.use('/', brands)
 
 const shoeReviews = require('./controllers/shoes_reviews')
 app.use('/', shoeReviews)
 
-// const apparelsReviews = require('./controllers/apparels_reviews')
-// app.use('/', apparelsReviews)
+const apparelsReviews = require('./controllers/apparels_reviews')
+app.use('/', apparelsReviews)
 
 const users = require('./controllers/users')
 app.use('/', users)
