@@ -35,4 +35,6 @@ const apparelsReviewsSchema = new mongoose.Schema({
 	}
 })
 
-module.exports = new mongoose.model('ApparelsReviews', apparelsReviewsSchema)
+const ApparelsReviews = mongoose.model('ApparelsReviews', apparelsReviewsSchema);
+
+module.exports = {ApparelsReviews, apparelsReviewsSchema}
