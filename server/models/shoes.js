@@ -1,5 +1,5 @@
 const mongoose = require('../db/connections')
-const ShoeReviews = require('./shoes_reviews')
+const ShoeReviews = require('./shoes_reviews').shoeReviewsSchema
 
 const shoesSchema = new mongoose.Schema({
 	name: String,
@@ -14,16 +14,14 @@ const shoesSchema = new mongoose.Schema({
 		data: Buffer,
 		contentType: String
 	},
-	reviews: [ShoeReviews]
-	// reviews: [{
-	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'ShoeReviews'
-	// }]
-	// brand: {
-	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref:'Brands',
-	// 	required: true
-	// }
+	reviews: [ShoeReviews],
+	brand: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref:'Brands',
+		required: true
+	}
 })
 
-module.exports = new mongoose.model('Shoes', shoesSchema)
+const Shoes = mongoose.model('Shoes', shoesSchema);
+
+module.exports = {Shoes, shoesSchema}
