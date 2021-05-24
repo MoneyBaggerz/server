@@ -22,8 +22,6 @@ const apparelsSchema = new mongoose.Schema({
 	}
 })
 
-// module.exports = new mongoose.model('Apparels', apparelsSchema)
-
 const Apparels = mongoose.model('Apparels', apparelsSchema);
 
 module.exports = {Apparels, apparelsSchema}
