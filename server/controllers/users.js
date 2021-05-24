@@ -1,7 +1,6 @@
-const express = require('express');
-const user = require('../models/users');
+const express = require('express')
+const user = require('../models/users')
 const router = express.Router()
-
 
 // Get all users
 router.get('/', (req, res, next) => {
@@ -43,4 +42,4 @@ router.delete('/:id', (req, res, next) => {
 // Sign up
 router.post()
 
-module.exports = router;
+module.exports = router
