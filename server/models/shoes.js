@@ -10,10 +10,10 @@ const shoesSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
-	image: {
+	image: [{
 		data: Buffer,
 		contentType: String
-	},
+	}],
 	reviews: [ShoeReviews],
 	brand: {
 		type: mongoose.Schema.Types.ObjectId,
