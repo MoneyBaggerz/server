@@ -1,4 +1,4 @@
-const mongoose = require('../db/connections');
+const mongoose = require('../db/connections')
 
 const usersSchema = new mongoose.Schema({
 	email: String,
@@ -9,6 +9,6 @@ const usersSchema = new mongoose.Schema({
 	gender: String,
 	cart: String,
 	want: Boolean,
-});
+})
 
-module.exports = new mongoose.model('Users', usersSchema);
+module.exports = new mongoose.model('Users', usersSchema)
