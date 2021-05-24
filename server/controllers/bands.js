@@ -1,5 +1,5 @@
 const express = require('express')
-const Brands = require('../models/brands')
+const Brands = require('../models/brands').Brands
 const router = express.Router()
 
 // Get brands
