@@ -1,5 +1,6 @@
 const express = require('express')
-const Shoes = require('../models/shoes')
+const Brands = require('../models/brands').Brands
+const Shoes = require('../models/shoes').Shoes
 const router = express.Router()
 // const { requireToken } = require('../middleware/auth')
 
@@ -27,9 +28,22 @@ router.get('/shoes/:id', (req, res, next) => {
 })
 
 // POST a shoe
-router.post('/shoes', (req, res, next) => {
-	Shoes.create(req.body)
-		.then((shoes) => res.json(shoes))
+router.post('/:brandId/shoes', (req, res, next) => {
+	const newShoe = {
+		...req.body,
+		brand: req.params.brandId
+	}
+	Shoes.create(newShoe)
+		.then((shoe) => {
+			Brands.findById(req.params.brandId)
+			.then((brand) => {
+				brand.shoes.push(shoe)
+				return brand.save()
+			})
+			.then(() => {
+				res.status(201)
+			})
+		})
 		.catch(next)
 })
 
