@@ -36,13 +36,9 @@ router.post('/:brandId/shoes', upload.array('image', 3), (req, res, next) => {
 	}
 	Shoes.create(newShoe)
 		.then((shoe) => {
-			Brands.findById(req.params.brandId)
-			.then((brand) => {
-				brand.shoes.push(shoe)
-				return brand.save()
-			})
-			.then(() => {
-				res.status(201)
+			Brands.findByIdAndUpdate({_id:req.params.brandId},{$push:{shoes:shoe}})
+			.then((doc) => {
+				res.json(doc)
 			})
 		})
 		.catch(next)

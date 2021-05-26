@@ -22,11 +22,16 @@ router.get('/:shoesId/reviews', (req, res, next) => {
 router.post('/:shoesId/reviews', (req, res, next) => {
 	ShoesReviews.create(req.body)
 		.then((shoeReview) => {
-			Shoes.findById(req.params.shoesId)
-			.then((shoe) => {
-				shoe.reviews.push(shoeReview)
-				return shoe.save()
-			})
+			// Shoes.findById(req.params.shoesId)
+			// .then((shoe) => {
+			// 	shoe.reviews.push(shoeReview)
+			// 	return shoe.save()
+			// })
+			Shoes.findByIdAndUpdate(
+				{ _id: req.params.shoesId },
+				{ $push: { reviews: shoeReview } }
+			)
+
 		})
 		.then(() => {
 			res.status(201)

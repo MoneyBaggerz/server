@@ -41,14 +41,12 @@ router.post('/:brandId/apparels', (req, res, next) => {
 	}
 	Apparels.create(newApparel)
 		.then((apparel) => {
-			Brands.findById(req.params.brandId)
-			.then((brand) => {
-				brand.apparels.push(apparel)
-				return brand.save()
-			})
-			.then(() => {
-				res.status(201)
-			})
+			Brands.findByIdAndUpdate(
+				{ _id: req.params.brandId },
+				{ $push: { apparels:apparel } }
+			).then(() => {
+				res.status(201);
+			});
 		})
 		.catch(next)
 })
