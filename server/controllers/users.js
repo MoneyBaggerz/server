@@ -3,7 +3,7 @@ const user = require('../models/users')
 const router = express.Router()
 
 // Get all users
-router.get('/', (req, res, next) => {
+router.get('/users', (req, res, next) => {
     user.find({})
     .then((users) => res.json(users))
 	.catch(next)
@@ -19,7 +19,7 @@ router.get('/:id', (req, res, next) => {
 })
  
 // Create the user
-router.post('/', (req, res, next) => {
+router.post('/users', (req, res, next) => {
 	user.create(req.body)
 		.then((user) => res.json(user))
 		.catch(next)

@@ -28,11 +28,13 @@ router.get('/apparels/:id', (req, res, next) => {
 })
 
 // POST a apparel
-router.post('/apparels', (req, res, next) => {
-	Apparels.create(req.body)
-		.then((apparels) => res.json(apparels))
-		.catch(next)
-})
+
+//old version
+// router.post('/apparels', (req, res, next) => {
+// 	Apparels.create(req.body)
+// 		.then((apparels) => res.json(apparels))
+// 		.catch(next)
+// })
 
 router.post('/:brandId/apparels', (req, res, next) => {
 	const newApparel = {
@@ -52,10 +54,15 @@ router.post('/:brandId/apparels', (req, res, next) => {
 })
 
 // PUT a apparel
-router.put('/apparels/:id', (req, res, next) => {
-	Apparels.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-		.then((apparels) => res.json(apparels))
-		.catch(next)
+router.put('/:brandId/apparels/:apparelId', (req, res, next) => {
+	Apparels.findOneAndUpdate({ _id: req.params.apparelId }, req.body, { new: true })
+		.then((apparel) =>
+			Brands.updateOne(
+				{ _id: req.params.brandId, 'apparels._id': apparel._id },
+				{ $set: { 'apparels.$': apparel } }
+			)
+		)
+		.catch(next);
 })
 
 // DELETE a apparel

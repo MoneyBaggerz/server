@@ -22,7 +22,7 @@ app.use('/', shoes)
 const apparels = require('./controllers/apparels')
 app.use('/', apparels)
 
-const brands = require('./controllers/bands')
+const brands = require('./controllers/brands')
 app.use('/', brands)
 
 const shoeReviews = require('./controllers/shoes_reviews')
