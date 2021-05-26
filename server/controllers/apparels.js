@@ -59,9 +59,15 @@ router.put('/apparels/:id', (req, res, next) => {
 })
 
 // DELETE a apparel
-router.delete('/apparels/:id', (req, res, next) => {
-	Apparels.findByIdAndDelete(req.params.id)
-		.then((apparels) => res.json(apparels))
+router.delete('/:brandId/apparels/:apparelId', (req, res, next) => {
+	
+	Apparels.findByIdAndDelete(req.params.shoeId)
+		.then((apparel) => {
+			Brands.findByIdAndUpdate({_id:req.params.brandId},{$pull:{apparels:apparel}})
+			.then((doc) => {
+				res.json(doc)
+			})
+		}).then(() => res.status(420))
 		.catch(next)
 })
 
