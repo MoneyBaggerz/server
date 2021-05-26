@@ -5,13 +5,6 @@ const router = express.Router()
 const { upload } = require('../middleware/img')
 // const { requireToken } = require('../middleware/auth')
 
-// Get shoes
-router.get('/shoes', (req, res, next) => {
-	Shoes.find({})
-		.then((shoes) => res.json(shoes))
-		.catch(next)
-})
-
 // Get user shoes
 // router.get('/users/shoes', requireToken, (req, res, next) => {
 // 	Shoes.find({ 
@@ -20,6 +13,13 @@ router.get('/shoes', (req, res, next) => {
 // 	.then((shoes) => res.json(shoes))
 // 	.catch(next)
 // })
+
+// Get shoes
+router.get('/shoes', (req, res, next) => {
+	Shoes.find({})
+		.then((shoes) => res.json(shoes))
+		.catch(next)
+})
 
 // GET a shoe
 router.get('/shoes/:id', (req, res, next) => {
@@ -45,9 +45,14 @@ router.post('/:brandId/shoes', upload.array('image', 3), (req, res, next) => {
 })
 
 // PUT a shoe
-router.put('/shoes/:id', upload.single('image'), (req, res, next) => {
-	Shoes.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-		.then((shoes) => res.json(shoes))
+router.put('/:brandId/shoes/:shoeId', upload.single('image'), (req, res, next) => {
+	Shoes.findOneAndUpdate({ _id: req.params.shoeId }, req.body, { new: true })
+		.then((shoe) => {
+			Brands.findByIdAndUpdate({_id:req.params.brandId}, req.body, {new:shoe})
+			.then((doc) => {
+				res.json(doc)
+			})
+		})
 		.catch(next)
 })
 
