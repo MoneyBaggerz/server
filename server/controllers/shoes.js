@@ -52,9 +52,12 @@ router.put('/shoes/:id', upload.array('image', 3), (req, res, next) => {
 })
 
 // DELETE a shoe
-router.delete('/shoes/:id', (req, res, next) => {
-	Shoes.findByIdAndDelete(req.params.id)
-		.then((shoes) => res.json(shoes))
+router.delete('/:brandId/shoes/:shoeId', (req, res, next) => {
+	
+	Shoes.findByIdAndDelete(req.params.shoeId)
+		.then((shoe) => {
+			Brands.findByIdAndUpdate({_id:req.params.brandId},{$pull:{shoes:shoe}})
+		}).then(() => res.status(420))
 		.catch(next)
 })
 
