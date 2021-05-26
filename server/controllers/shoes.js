@@ -45,7 +45,7 @@ router.post('/:brandId/shoes', upload.array('image', 3), (req, res, next) => {
 })
 
 // PUT a shoe
-router.put('/shoes/:id', upload.array('image', 3), (req, res, next) => {
+router.put('/shoes/:id', upload.single('image'), (req, res, next) => {
 	Shoes.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
 		.then((shoes) => res.json(shoes))
 		.catch(next)
