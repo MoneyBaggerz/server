@@ -46,9 +46,11 @@ router.post('/:brandId/shoes', upload.array('image', 3), (req, res, next) => {
 
 // PUT a shoe
 router.put('/:brandId/shoes/:shoeId', upload.single('image'), (req, res, next) => {
+
 	Shoes.findOneAndUpdate({ _id: req.params.shoeId }, req.body, { new: true })
 		.then((shoe) => {
-			Brands.findByIdAndUpdate({_id:req.params.brandId}, req.body, {new:shoe})
+			// Brands.findByIdAndUpdate({_id:req.params.brandId}, req.body, {new:shoe})
+			Brands.updateOne({_id:req.params.brandId,"shoes._id":shoe._id},{$set:{"shoes.$":shoe}})
 			.then((doc) => {
 				res.json(doc)
 			})
