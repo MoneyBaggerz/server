@@ -1,16 +1,24 @@
 const express = require('express')
 const user = require('../models/users')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const { requireToken, createUserToken } = require('../middleware/auth')
+require('dotenv').config
 
 // Get all users
+<<<<<<< HEAD
 router.get('/users', (req, res, next) => {
+=======
+router.get('/user', (req, res, next) => {
+>>>>>>> user routes & auth complete
     user.find({})
     .then((users) => res.json(users))
 	.catch(next)
 })
 
 // Get user by id
-router.get('/:id', (req, res, next) => {
+router.get('/user/:id', (req, res, next) => {
 	user.findById({ _id: req.params.id })
 		.then((user) => {
 			res.json(user)
@@ -18,28 +26,40 @@ router.get('/:id', (req, res, next) => {
 		.catch(next)
 })
  
-// Create the user
-router.post('/users', (req, res, next) => {
-	user.create(req.body)
-		.then((user) => res.json(user))
-		.catch(next)
-})
-
 // Update the user
-router.put('/:id', (req, res, next) => {
-    user.findByIdAndUpdate({_id: req.params.id},  req.body, { new: true })
+router.put('/user/:id', (req, res, next) => {
+    user.findByIdAndUpdate({ _id: req.params.id },  req.body, { new: true })
         .then((user) => res.json(user))
         .catch(next)
 })
 
 // Delete a user
-router.delete('/:id', (req, res, next) => {
-	User.findByIdAndDelete(req.params.id)
+router.delete('/user/:id', (req, res, next) => {
+	user.findByIdAndDelete(req.params.id)
 		.then((user) => res.json(user))
 		.catch(next);
 })
 
-// Sign up
-router.post()
+// Sign up 
+router.post('/signup', (req, res, next) => {
+	bcrypt
+		.hash(req.body.password, 10)
+		.then((hash) => ({ email: req.body.email, password: hash }))
+		.then((User) => user.create(User))
+		.then((User) => res.status(201).json(User))
+		.catch(next);
+});
+
+//Sign in
+router.post('/signin', (req, res, next) => {
+	user.findOne({ email: req.body.email })
+		.then((user) => createUserToken(req, user))
+		.then((token) => res.json({ 
+            token,
+            message: 'success',
+            status: 200 
+        }))
+		.catch(next);
+});
 
 module.exports = router

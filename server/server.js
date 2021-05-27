@@ -31,8 +31,8 @@ app.use('/', shoeReviews)
 const apparelsReviews = require('./controllers/apparels_reviews')
 app.use('/', apparelsReviews)
 
-// const users = require('./controllers/users')
-// app.use('/', users)
+const users = require('./controllers/users')
+app.use('/', users)
 
 dotenv.config()
 const port = ('port', process.env.PORT || 4000)
