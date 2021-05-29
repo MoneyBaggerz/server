@@ -7,11 +7,7 @@ const { requireToken, createUserToken } = require('../middleware/auth')
 require('dotenv').config
 
 // Get all users
-<<<<<<< HEAD
-router.get('/users', (req, res, next) => {
-=======
 router.get('/user', (req, res, next) => {
->>>>>>> user routes & auth complete
     user.find({})
     .then((users) => res.json(users))
 	.catch(next)

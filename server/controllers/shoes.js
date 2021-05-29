@@ -3,16 +3,16 @@ const Brands = require('../models/brands').Brands
 const Shoes = require('../models/shoes').Shoes
 const router = express.Router()
 const { upload } = require('../middleware/img')
-// const { requireToken } = require('../middleware/auth')
+const { requireToken } = require('../middleware/auth')
 
 // Get user shoes
-// router.get('/users/shoes', requireToken, (req, res, next) => {
-// 	Shoes.find({ 
-// 		user: mongoose.Types.ObjectId(req.user._id)
-// 	})
-// 	.then((shoes) => res.json(shoes))
-// 	.catch(next)
-// })
+router.get('/users/shoes', requireToken, (req, res, next) => {
+	Shoes.find({ 
+		user: mongoose.Types.ObjectId(req.user._id)
+	})
+	.then((shoes) => res.json(shoes))
+	.catch(next)
+})
 
 // Get shoes
 router.get('/shoes', (req, res, next) => {
